@@ -1,6 +1,19 @@
-[TOC]
+---
+title: 'FUZZIFICATION: Anti-Fuzzing Techniques(USENIX 2019)'
+tags:
+  - paper
+  - security
+  - fuzz
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - fuzz
+abbrlink: 14b4d99
+date: 2020-05-17 23:27:00
+---
+<!--toc-->
 
-# FUZZIFICATION: Anti-Fuzzing Techniques(USENIX 2019)
 
 > fuzz作为一种自动化技术，在安全人员手中能够用来发现漏洞，但同时也让hacker能够通过fuzz寻找0day进行攻击。
 >
@@ -67,7 +80,7 @@ anti-fuzzing的目的类似于二进制中的混淆技术，为了提高攻击�
 
 **FUZZIFICATION流程：**
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gevrm8v2lmj30ua0h20y4.jpg" alt="image-20200517212520008" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134022.jpg" alt="image-20200517212520008" style="zoom:50%;" />
 
 1. 对外公开使用FUZZIFICATION技术编译生成受保护的二进制文件
 2. 对内使用常规方法编译生成正常的二进制文件
@@ -87,7 +100,7 @@ anti-fuzzing的目的类似于二进制中的混淆技术，为了提高攻击�
 
 下列已有的方法都无法同时满足这四个要求
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gevrsukswqj30vg0d8q6c.jpg" alt="image-20200517213140563" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134027.jpg" alt="image-20200517213140563" style="zoom:50%;" />
 
 
 
@@ -116,7 +129,7 @@ anti-fuzzing的目的类似于二进制中的混淆技术，为了提高攻击�
 
 如果简单的注入sleep等语句，那么可以十分方便的进行去除，所以作者设计了基于CSmith的原语，使用算数运算并和原始代码关联
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gevua4kn1sj30ti0ii44l.jpg" alt="image-20200517225729039" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134032.jpg" alt="image-20200517225729039" style="zoom:50%;" />
 
 
 
@@ -161,7 +174,7 @@ anti-fuzzing的目的类似于二进制中的混淆技术，为了提高攻击�
 
 - 将显示数据流转换为隐式数据流，对抗污点分析
 
-  ![image-20200517231001187](https://tva1.sinaimg.cn/large/007S8ZIlly1gevun69r6rj30w00ks0zx.jpg)
+  ![image-20200517231001187](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134037.jpg)
 
 - 注入多个代码块，有意触发路径爆炸，对抗符号执行
 

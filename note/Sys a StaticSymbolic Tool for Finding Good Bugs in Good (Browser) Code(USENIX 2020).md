@@ -1,4 +1,21 @@
-## Sys: a Static/Symbolic Tool for Finding Good Bugs in Good (Browser) Code(USENIX 2020)
+---
+title: >-
+  Sys: a Static/Symbolic Tool for Finding Good Bugs in Good (Browser)
+  Code(USENIX 2020)
+tags:
+  - paper
+  - security
+  - automatic analyse
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - automatic_analyse
+abbrlink: bc8e474f
+date: 2020-08-28 16:04:00
+---
+<!--toc-->
+
 
 > 作者设计了一个可扩展的漏洞发现工具(Sys)，并且在已经被好多自动化工具检查过的软件中发现了一些漏洞，比如说Chrome，Firefox，以及sqlite3。
 >
@@ -18,7 +35,7 @@
 
 Sys的符号执行并不是执行所有的片段，而是执行一部分代码，因为大部分的bug都是存在于一小部分上下文中的，比如说找无限循环，只要看for循环就可以了，这样也减少了符号执行的资源开销。
 
-![image-20200827161021264](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-27-081021.png)
+![image-20200827161021264](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-27-081021.png)
 
 以上就是Sys在三个软件中找到的bugs总结。
 
@@ -36,7 +53,7 @@ Sys的符号执行并不是执行所有的片段，而是执行一部分代码�
 
 拿一个Sqlite的例子来说，用户只需要提供一个checker和一个LLVM的IR文件给Sys，就可以得到最终的bug报告。感觉还是很易用的呢，不过看了他论文实验的机器配置，虽然开源了代码，但让人丝毫没有想用的兴趣
 
-![image-20200827161706760](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-27-081707.png)
+![image-20200827161706760](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-27-081707.png)
 
 Sys发现bug三部曲：
 
@@ -44,7 +61,7 @@ Sys发现bug三部曲：
 - 动态符号执行确认
 - 总结报告
 
-![image-20200827164121733](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-27-084122.png)
+![image-20200827164121733](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-27-084122.png)
 
 #### Static
 
@@ -54,7 +71,7 @@ Sys发现bug三部曲：
 
 下面是一个Static 扩展的例子，用来找内存越界的问题
 
-![image-20200827164843936](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-27-084844.png)
+![image-20200827164843936](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-27-084844.png)
 
 #### Symbolic
 
@@ -63,7 +80,7 @@ Sys发现bug三部曲：
 
 Sys的符号执行在内存拷贝的基础上进行，在IR上建立约束关系和逻辑表达式，然后加入用户的checker，最后使用SMT求解器求解关系是否可达。下面是一个Symbolic checker的例子
 
-![image-20200827204415589](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-27-124415.png)
+![image-20200827204415589](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-27-124415.png)
 
 同时Sys在执行的时候也会跳过无关的语句和函数（类似于函数切片的思想，去除无关语句的执行，提高效率）
 
@@ -113,7 +130,7 @@ Sys的符号执行在内存拷贝的基础上进行，在IR上建立约束关系
 
 同时SysDSL也完成了对每一条LLVM指令的表达，这样可以让用户更好的实现checker的功能
 
-![image-20200828152605972](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-28-072606.png)
+![image-20200828152605972](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-28-072606.png)
 
 
 
@@ -154,19 +171,19 @@ Sys也采用了Valdrind等工具一样的Shadow memory方法
 
 动态checker：用shadow memory的看是不是真的没有对那块内存进行写入
 
-![image-20200828155101240](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-28-075101.png)
+![image-20200828155101240](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-28-075101.png)
 
 然后也是在Chrome、Firefox、FreeBSD里找到了一些变量未初始化漏洞
 
-![image-20200828155211996](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-28-075212.png)
+![image-20200828155211996](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-28-075212.png)
 
 #### Heap out-of-bounds
 
-![image-20200828155353032](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-28-075353.png)
+![image-20200828155353032](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-28-075353.png)
 
 #### Concrete out-of-bounds
 
-![image-20200828155439518](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-28-075439.png)
+![image-20200828155439518](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-28-075439.png)
 
 #### Unvalidated user data
 

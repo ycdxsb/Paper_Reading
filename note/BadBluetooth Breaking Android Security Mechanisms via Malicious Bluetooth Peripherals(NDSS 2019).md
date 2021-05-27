@@ -1,8 +1,23 @@
-[TOC]
+---
+title: >-
+  BadBluetooth: Breaking Android Security Mechanisms via Malicious Bluetooth
+  Peripherals(NDSS 2019)
+tags:
+  - paper
+  - security
+  - mobile security
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - mobile_security
+abbrlink: '93934686'
+date: 2020-05-19 15:55:00
+---
+<!--toc-->
 
 
 
-# BadBluetooth: Breaking Android Security Mechanisms via Malicious Bluetooth Peripherals(NDSS 2019)
 
 > 本文针对Android 4.2后google开发的蓝牙栈 BlueDroid中存在的粗粒度权限管理问题，提出了并实现了在多版本中的攻击**BadBluetooth**。
 >
@@ -38,7 +53,7 @@
 
 **蓝牙协议栈的结构**如下图：
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexpausq2uj30lu0f8wg9.jpg" alt="image-20200519133616474" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134146.jpg" alt="image-20200519133616474" style="zoom:50%;" />
 
 蓝牙栈是一个多层的结构，包括物理层、链路层、中间件层和应用层。下层由蓝牙芯片实现，包含无线控制器、系带控制器等。它们通过主机控制器接口(Host Controller Interface)与操作系统进行通信，中间件层的协议由操作系统实现。
 
@@ -89,7 +104,7 @@
 
   - 如果连接时为耳机的配置文件，在连接后修改为输入设备的配置文件，那么就能够通过蓝牙进行输入了
 
-    <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexr098eygj30mo0jowi9.jpg" alt="image-20200519143519758" style="zoom:67%;" />
+    <img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134154.jpg" alt="image-20200519143519758" style="zoom:67%;" />
 
 - **Weakness #2: Overly Openness to Profile Connection.**
 
@@ -123,7 +138,7 @@
 
 **攻击流程**：
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexrdkoww2j30le0lymzl.jpg" alt="image-20200519144807796" style="zoom:67%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134202.jpg" alt="image-20200519144807796" style="zoom:67%;" />
 
 - **修改配置文件(#1 #2 #3)**：配对完成后，设备添加其他配置文件，并在攻击完成后删除
 - **静默连接(#4)**：使用静默方式连接恶意蓝牙设备
@@ -145,13 +160,13 @@
 
 作者根据现有的android profile，总结并实现了攻击，其中HID、PAN和HFP/HSP这三个profile可以被攻击者利用
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexrjiqa52j30mk0eytaq.jpg" alt="image-20200519145350562" style="zoom:67%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134207.jpg" alt="image-20200519145350562" style="zoom:67%;" />
 
 ### HIP(Human Interface Device)
 
 例如键盘和鼠标，当HIP接入后，就能向android手机输入内容了
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexs1b978ij30me0c4wg9.jpg" alt="image-20200519151056154" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134212.jpg" alt="image-20200519151056154" style="zoom:50%;" />
 
 
 
@@ -173,7 +188,7 @@
 
 ### PAN(Persinal Area Networking)
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexsab83k1j30m20pqae0.jpg" alt="image-20200519151935464" style="zoom:67%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134216.jpg" alt="image-20200519151935464" style="zoom:67%;" />
 
 **危害**：
 
@@ -184,7 +199,7 @@
 
 ### HF(Hands Free)
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexsr5jdhrj30mm0dignj.jpg" alt="image-20200519153546573" style="zoom:67%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134221.jpg" alt="image-20200519153546573" style="zoom:67%;" />
 
 **危害**：
 
@@ -215,7 +230,7 @@ Raspberry Pi 2 + 1100 行Python 代码（PyBluez）
 - PAN attack，tcpdump和dnsmasq
 - HFP attack，pulseaudio和ofono
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexsvcrl9xj30mw0l2dim.jpg" alt="image-20200519153858880" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134226.jpg" alt="image-20200519153858880" style="zoom:50%;" />
 
 在测试中，Android5.0到8.1之间的测试版本都攻击成功了
 
@@ -225,7 +240,7 @@ Raspberry Pi 2 + 1100 行Python 代码（PyBluez）
 
 为了解决发现的问题，作者也提出并实现了相应的防御框架，对profile进行控制
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gexsxb3bhfj30x00raase.jpg" alt="image-20200519154141699" style="zoom: 50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134238.jpg" alt="image-20200519154141699" style="zoom: 50%;" />
 
 经过检验，这个上层防御框架能够在比正常使用多12%的时间，实现很好的防御
 

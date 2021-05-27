@@ -1,5 +1,18 @@
-[TOC]
-
+---
+title: B2SFinder——Detecting Open-Source Software Reuse in COTS Software(ASE 2019)
+tags:
+  - paper
+  - security
+  - automatic analyse
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - automatic_analyse
+abbrlink: 157adce2
+date: 2020-05-11 16:00:00
+---
+<!--toc-->
 
 
 ## B2SFinder: Detecting Open-Source Software Reuse in COTS Software
@@ -32,7 +45,7 @@
 
 对于第二种方法，此前也已有一些研究见下表
 
-![image-20200510210806748](https://tva1.sinaimg.cn/large/007S8ZIlly1genns60fo3j30vu0boae9.jpg)
+![image-20200510210806748](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133609.jpg)
 
 
 
@@ -46,11 +59,11 @@
 
 B2SFinder的**工作流**如下：
 
-![image-20200510211509018](https://tva1.sinaimg.cn/large/007S8ZIlly1geno02o1vnj312u08gjtj.jpg)
+![image-20200510211509018](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133616.jpg)
 
 整体上的**特征分类以及算法**如下：
 
-![image-20200510213142174](https://tva1.sinaimg.cn/large/007S8ZIlly1genogq57s4j30u80g245h.jpg)
+![image-20200510213142174](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133623.jpg)
 
 同时，我们也将复用分为以下三类：单一复用、部分复用和嵌套复用，其中前两类是真正的复用。
 
@@ -75,7 +88,7 @@ B2SFinder的**工作流**如下：
 
 ### Matching Score Calculation
 
-![image-20200510214549545](https://tva1.sinaimg.cn/large/007S8ZIlly1genoveqrxjj31200k40xr.jpg)
+![image-20200510214549545](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133631.jpg)
 
 从上图中可以看到，FoxitReader.exe和Openssl的export部分没有共同的函数名，并且只有19.7%的字符串常量为共有字符串。因此我们能够知道BAT和OSSPolice这两种方法在这一例子中效果是不理想的。但是我们能够在data段和rdata段以及text段找到一些其他的特征能够匹配上，最终，我们为B2SFinder选取了图中的7种特征。
 
@@ -116,7 +129,7 @@ B2SFinder的**工作流**如下：
 
 特征选取只要考虑两个影响：1、特征在源码和二进制上都存在；2、编译过程对特征改变不大。
 
-![image-20200511145048120](https://tva1.sinaimg.cn/large/007S8ZIlly1geoihxp3oyj30tk0fqacg.jpg)
+![image-20200511145048120](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133637.jpg)
 
 
 
@@ -124,7 +137,7 @@ B2SFinder的**工作流**如下：
 
 将7种特征分为 字符串型、数字型和控制流型，并使用不同的算法进行匹配
 
-![image-20200511145520328](https://tva1.sinaimg.cn/large/007S8ZIlly1geoimm7s70j30ta0egtba.jpg)
+![image-20200511145520328](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133643.jpg)
 
 
 
@@ -149,33 +162,33 @@ B2SFinder的**工作流**如下：
 
 **Computing the Specificity Weights of Bitstreams as Entrophy**
 
-![image-20200511153909084](https://tva1.sinaimg.cn/large/007S8ZIlly1geojw70gagj30sy0agmyq.jpg)
+![image-20200511153909084](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133651.jpg)
 
 **S-IDF for Computing Frequency Weights**
 
-![image-20200511154042185](https://tva1.sinaimg.cn/large/007S8ZIlly1geojxtd4loj30oa03k0sy.jpg)
+![image-20200511154042185](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133657.jpg)
 
 ### Computing Matching Scores
 
-![image-20200511154138803](https://tva1.sinaimg.cn/large/007S8ZIlly1geojysjfwlj30kc0zcdl4.jpg)
+![image-20200511154138803](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133701.jpg)
 
 ### Identifying Reuse Types
 
 
 
-![image-20200511154259605](https://tva1.sinaimg.cn/large/007S8ZIlly1geok073hrbj30ki06kgmi.jpg)
+![image-20200511154259605](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133706.jpg)
 
 识别部分复用：
 
-![image-20200511154448598](https://tva1.sinaimg.cn/large/007S8ZIlly1geok231wa1j30ke0lw41e.jpg)
+![image-20200511154448598](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133711.jpg)
 
 识别递归复用：
 
-![image-20200511154512900](https://tva1.sinaimg.cn/large/007S8ZIlly1geok2ieb3zj30k0094dh3.jpg)
+![image-20200511154512900](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133716.jpg)
 
 ## IMPLEMENTATION
 
-![image-20200511154659189](https://tva1.sinaimg.cn/large/007S8ZIlly1geok4chk3yj315e0ewn19.jpg)
+![image-20200511154659189](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133722.jpg)
 
 ## 个人感觉
 

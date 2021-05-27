@@ -1,11 +1,28 @@
-[TOC]
+---
+title: >-
+  Data-Oriented Programming: On the Expressiveness of Non-Control Data
+  Attacks(S&P 2016)
+tags:
+  - paper
+  - security
+  - others
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - others
+abbrlink: c30e365e
+date: 2020-05-26 16:23:00
+---
 
-# Data-Oriented Programming: On the Expressiveness of Non-Control Data Attacks(S&P 2016)
+<!--toc-->
+
 
 > 根据控制流的攻击我们知道有ROP和JOP，分别利用包含ret和jmp的Gadgets进行攻击，劫持控制流。
 >
 > 非控制数据攻击通过攻击程序内存，达到信息泄露或者权限提升等目的。文中提出了DOP攻击，利用程序中的Gadgets，构造任意x86程序的非控制数据攻击，并且这种攻击是图灵完备的。
 
+<!--more-->
 ## Introduction
 
 控制流劫持攻击是目前主流的攻击，例如ROP及其变种，但对此人们也有很多防御措施：CFI、CCFI、CPI、TASR、ASLR、DEP等。
@@ -32,19 +49,19 @@
 
 通过直接攻击数据流来达到攻击目的，例如下图中，我们只要修改变量`pw->pw_uid`的值，就能达到提权的目的
 
-![image-20200526132809230](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5sekdby9j30wq0c4407.jpg)
+![image-20200526132809230](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134306.jpg)
 
 
 
 ### Example of Data-oriented Programming
 
-![image-20200526133329831](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5sk2vs66j30j00bqgni.jpg)
+![image-20200526133329831](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134310.jpg)
 
 能看懂啊line 7 存在溢出，因此buf溢出能控制局部变量(tyoe,size,connect_limie)，同时局部变量又能修改指针（line12，line13）这种就称为`data-oriented gadgets`，同时可以注意到它们都在while循环中，因此可以连续的利用，称为`gadget dispatchers`
 
 通过对上图中的DOP利用，能够更新Code3链表中的函数，并且这种攻击时满足CFG完整性的
 
-![image-20200526133757036](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5sopvx5jj30j005odgq.jpg)
+![image-20200526133757036](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134315.jpg)
 
 ### Questions
 
@@ -58,7 +75,7 @@
 
 DOP主要是模拟表达式计算，因此定义了如下DOP语言
 
-![image-20200526134248369](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5strl02nj30ii09emyj.jpg)
+![image-20200526134248369](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134324.jpg)
 
 包括六种虚拟指令，实现算术、逻辑、赋值、加载、存储、跳转、条件跳转等操作。
 
@@ -75,19 +92,19 @@ DOP和ROP很像，他们的区别主要在于以下两点：
 
 **模拟算数运算**：
 
-![image-20200526135232984](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5t3wcjkpj30kg05ygmn.jpg)
+![image-20200526135232984](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134329.jpg)
 
 **模拟赋值运算**：
 
-![image-20200526135300192](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5t4dnwx8j30n8066my2.jpg)
+![image-20200526135300192](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134334.jpg)
 
 **模拟加载，存储运算**：
 
-![image-20200526135344429](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5t55au74j30ns08ojt0.jpg)
+![image-20200526135344429](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134339.jpg)
 
 ### Gadgets Dispatcher
 
-![image-20200526143825499](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5ufmz55cj310a0goq6k.jpg)
+![image-20200526143825499](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134343.jpg)
 
 Dispatcher用来对gadgets进行迭代调度，在每一轮迭代中选用不同的gadgets对上一轮的结果进行处理，为了将第i次迭代的输出和第 i+1 次迭代的输入对应，gadgets将第 i+1 的加载地址设置为第 i 次迭代的存储地址。
 
@@ -97,7 +114,7 @@ Dispatcher用来对gadgets进行迭代调度，在每一轮迭代中选用不同
 
 **模拟跳转**：
 
-![image-20200526144557526](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5ungt8s5j30ly0agmym.jpg)
+![image-20200526144557526](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134348.jpg)
 
 关键是找到一个合适的变量，可以在每次循环迭代中修改的虚拟 PC 指针，如上述代码，有一个内存指针 `pubf -> current`，指向了恶意网络输入的缓冲区。在每一次循环迭代中，代码从该缓冲区读取一行，然后在循环体中处理它，因此这个指针可以用来模拟虚拟 PC 指针。对于模拟非条件跳转，攻击者只需要配置好内存，来触发另一个操作 gadgets（如加法、赋值）来改变虚拟 PC 指针的值。
 
@@ -120,7 +137,7 @@ Dispatcher用来对gadgets进行迭代调度，在每一轮迭代中选用不同
 
 使用LLVM实现对DOP gadgets的识别 (https://github.com/melynx/DOP-StaticAssist)：LLVM IR提供了比二进制更多的程序语义，同时避免了对程序源码的解析。它还允许对任何有LLVM前端的语言编写的源码进行语言诊断分析。
 
-![image-20200526150317786](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5v5ipu9kj30jq0budhh.jpg)
+![image-20200526150317786](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134354.jpg)
 
 **gadgets分类**：根据语义和运算的变量分为三类，并且在使用优先级上全局变量gadgets>函数参数gadgets>局部变量gadgets
 
@@ -132,7 +149,7 @@ Dispatcher用来对gadgets进行迭代调度，在每一轮迭代中选用不同
 
 同样也基于LLVM IR 实现（https://github.com/melynx/DOP-StaticAssist）
 
-![image-20200526150809559](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5vakdecwj30kw0dcgnu.jpg)
+![image-20200526150809559](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134359.jpg)
 
 ### Attack Contruction
 
@@ -156,7 +173,7 @@ Dispatcher用来对gadgets进行迭代调度，在每一轮迭代中选用不同
 
 在9个程序中找到了7518个gadgets和5052个gadgets dispatcher，因此是普遍存在的
 
-![image-20200526152840994](https://tva1.sinaimg.cn/large/007S8ZIlly1gf5vvxbqqnj316e0ekn1f.jpg)
+![image-20200526152840994](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134404.jpg)
 
 
 
@@ -177,7 +194,4 @@ DOP目前已经实现了对ASLR、DEP、TASR防御的突破，但也可能可以
 
 总体来说，上述保护措施都会对程序执行带来极大的开销，只是能用来防御，但也需要考量效率问题。
 
-
-
-## 个人感觉
 

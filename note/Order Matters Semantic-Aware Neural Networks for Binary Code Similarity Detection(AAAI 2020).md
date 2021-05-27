@@ -26,7 +26,7 @@ date: 2020-08-15 20:06:00
 
 ​		2017年有学者提出了Gemini网络（Gemini不是QG前主教练吗hhhh）
 
-![image-20200815151054450](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-071054.png)
+![image-20200815151054450](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-071054.png)
 
 ​		Gemini首先将CFG使用人工定义的特征，将CFG中的块表示为低维特征。然后使用Structure2vec生成图前嵌入。最后使用siamese计算两个二进制函数的相似度得分并使用梯度下降训练模型。
 
@@ -40,7 +40,7 @@ date: 2020-08-15 20:06:00
 
 ​		在order-aware模块，主要是提取节点的顺序信息。如下图，是在不同平台编译的同一函数的CFG，可以看到它们的Node1都与Node2和Node3连接。Node2都与Node4和Node5连接。这个相似性可以从它们的邻接矩阵中很容易看到。
 
-![image-20200815152436394](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-072436.png)
+![image-20200815152436394](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-072436.png)
 
 
 
@@ -59,7 +59,7 @@ date: 2020-08-15 20:06:00
 
 ## Model
 
-![image-20200815153750848](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-073751.png)
+![image-20200815153750848](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-073751.png)
 
 总览：
 
@@ -73,7 +73,7 @@ $$G_{final} = MLP([G_{ss},G_o])$$
 
 ​		在Bert预训练模型中，主要完成四个任务，这有很多好处：1.可以从不同架构、不同平台、不同优化选项下的CFG中得到block embedding；2.在预训练过程中，我们可以得到token、block、graph粒度下的信息（因为有token level、block level和两个graph level任务）；3.不需要需改编译器等来获得相似的块。
 
-​		![image-20200815162312068](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-082312.png)
+​		![image-20200815162312068](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-082312.png)
 
 ​		从上图可以看到Bert预训练时要完成的4个任务。
 
@@ -96,7 +96,7 @@ $$g_{s s}=R\left(h_{v}^{T} \mid v \in G\right)$$
 
 ### Order-aware 模块
 
-![image-20200815172129019](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-092129.png)
+![image-20200815172129019](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-092129.png)
 
 ​		在这一模块中使用CNN模型，主要是为了学习到CFG中的平移不变性（借鉴计算机视觉领域）
 
@@ -110,17 +110,17 @@ $$g_o = MaxPooling(ResNet(A))$$
 
 Task1：跨平台二进制代码相似度分析
 
-<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-114609.png" alt="image-20200815194609605" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-114609.png" alt="image-20200815194609605" style="zoom:50%;" />
 
 Task2：判断优化选项的能力
 
-<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-114630.png" alt="image-20200815194630555" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-114630.png" alt="image-20200815194630555" style="zoom:50%;" />
 
 
 
 采用CNN确实能够学到控制流图中的节点顺序信息
 
-![image-20200815194856904](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-08-15-114857.png)
+![image-20200815194856904](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-08-15-114857.png)
 
 
 

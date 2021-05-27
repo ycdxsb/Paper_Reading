@@ -1,4 +1,18 @@
-[TOC]
+---
+title: VUDDY A Scalable Approach for Vulnerable Code Clone Discovery(S&P 2017)
+tags:
+  - paper
+  - security
+  - automatic analyse
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - automatic_analyse
+abbrlink: 21fd9cb8
+date: 2020-04-03 23:57:00
+---
+<!--toc-->
 
 ## Abstract
 
@@ -93,7 +107,7 @@ VUDDY（VUlnerrable coDe clone DiscoverY）...（这名字取的真刻意）：
 
 抽象克隆定义：
 
-![image-20200403230003462](https://tva1.sinaimg.cn/large/00831rSTly1gdgz3a910nj30ru0kmwhq.jpg)
+![image-20200403230003462](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133855.jpg)
 
 ### Goals
 
@@ -105,7 +119,7 @@ VUDDY（VUlnerrable coDe clone DiscoverY）...（这名字取的真刻意）：
 
 VUDDY的框架如下图所示：
 
-![image-20200403230159765](https://tva1.sinaimg.cn/large/00831rSTly1gdgz59uvxlj30y60u0gsa.jpg)
+![image-20200403230159765](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133907.jpg)
 
 分为两个部分：预处理部分和克隆检测部分
 
@@ -126,13 +140,13 @@ VUDDY的框架如下图所示：
 
 **Abstraction and normalization**：对参数、类型、局部变量进行正规化，（统一用某个字符串代替），可以分为不抽象、参数抽象、局部变量抽象、数据类型抽象、函数调用抽象，见下图
 
-![image-20200403230718496](https://tva1.sinaimg.cn/large/00831rSTly1gdgzasl4tcj30ss17gahj.jpg)
+![image-20200403230718496](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133913.jpg)
 
 
 
 **Fingerprint generation**：计算函数体以长度和hash值，示例见下
 
-![image-20200403230804731](https://tva1.sinaimg.cn/large/00831rSTly1gdgzblu66ij30sg0mqjvd.jpg)
+![image-20200403230804731](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133920.jpg)
 
 ### Clone detector
 
@@ -183,19 +197,19 @@ VUDDY的框架如下图所示：
 
 **比较的配置：**
 
-![image-20200403233225311](https://tva1.sinaimg.cn/large/00831rSTly1gdh00x965jj30me06mab6.jpg)
+![image-20200403233225311](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133929.jpg)
 
 
 
 **大数据量比较：**
-
-![image-20200513212730805](https://tva1.sinaimg.cn/large/007S8ZIlly1ger57bil1rj312c09iq56.jpg)
+![image-20200513212730805](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133940.jpg)
 
 **准确率比较：**
+![image-20200513212747666](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-133945.jpg)
 
-![image-20200513212747666](https://tva1.sinaimg.cn/large/007S8ZIlly1ger57knckxj30j60b00vd.jpg)
 
-**完全克隆检测和抽象比较 ：**166个 VS 206个，后者比前者多了24%的结果
+
+**完全克隆检测和抽象比较:** 166个 VS 206个，后者比前者多了24%的结果
 
 
 
@@ -208,10 +222,6 @@ VUDDY的框架如下图所示：
 具体的分析就不说了
 
 
-
-## Case Study
-
-略
 
 ## Discussion
 

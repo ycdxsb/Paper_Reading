@@ -1,10 +1,28 @@
+---
+title: >-
+  Similarity of Binaries Across Optimization Levels and Obfuscation(ESORICS
+  2020)
+tags:
+  - paper
+  - security
+  - automatic analyse
+author: ycdxsb
+mathjax: true
+categories:
+  - papers
+  - security
+  - automatic_analyse
+date: 2020-12-10 22:14:00
+abbrlink: 930679b9
+---
+<!--toc-->
 
-
-## Similarity of Binaries Across Optimization Levels and Obfuscation(ESORICS 2020)
 
 > 现有的二进制相似度检测工作并没有很好的解决编译优化和混淆带来的影响，所以作者提出了`IMOPT`来重新优化代码，用于提高代码相似性检测的准确率。
 >
 > 该方法在测试集上和原本的Asm2vec相比，将精度提高了22.7%，并且可以缓解ollvm混淆带来的影响
+
+<!--more-->
 
 ### Introduction
 
@@ -100,11 +118,11 @@ y = x + y;                     y2 = x2 + y1;
 
 这个东西可以用来实现最小`SSA`，并引入`PHI`节点。例如通过下面的控制流图
 
-![image-20201124113007402](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114552.jpg)
+![image-20201124113007402](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114552.jpg)
 
 我们可以得到`Dominance Frontier`如下
 
-![image-20201124113410026](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114604.jpg)
+![image-20201124113410026](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114604.jpg)
 
 即块2和块8和块9中的对变量`x`的定义会在块5处聚合。
 
@@ -112,7 +130,7 @@ y = x + y;                     y2 = x2 + y1;
 
 为了引入最小SSA，需要利用`Dominance Frontier`加入PHI节点，示例如下
 
-![image-20201124113904892](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114613.jpg)
+![image-20201124113904892](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114613.jpg)
 
 对于左侧示例，我们可以得到`Dominance Frontier`并在聚合处加入PHI节点
 
@@ -166,7 +184,7 @@ def postorder(graph, root):
 
 
 
-<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114620.jpg" alt="image-20201124143708676" style="zoom:50%;" />
+<img src="https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114620.jpg" alt="image-20201124143708676" style="zoom:50%;" />
 
 对于上述示例，有：
 
@@ -182,7 +200,7 @@ def postorder(graph, root):
 
 `Symbols B, D, S, V are used to represent the set of blocks, definitions, statements and variables.`
 
-![image-20201124144805085](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114627.jpg)
+![image-20201124144805085](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114627.jpg)
 
 
 
@@ -194,7 +212,7 @@ def postorder(graph, root):
 
 `Symbols B, D, S, V are used to represent the set of blocks, definitions, statements and variables.`
 
-![image-20201124152513302](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114643.jpg)
+![image-20201124152513302](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114643.jpg)
 
 即`def-use`边，可达边，Dominating def，最大SSA下标数。
 
@@ -202,7 +220,7 @@ def postorder(graph, root):
 
 算法按照`RPO`顺序对函数进行处理，如下
 
-![image-20201124152646888](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114650.jpg)
+![image-20201124152646888](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114650.jpg)
 
 主函数十分简洁明了，不需要过多解释
 
@@ -223,7 +241,7 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 是正常的SSA生成的算法，不是新方法
 
-![image-20201124153537218](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114702.jpg)
+![image-20201124153537218](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114702.jpg)
 
 1. `IF`:s是一个`phi`函数，且s属于基本块`bi`，遍历所有可以到达`bi`的块`bj`，修改块`bj`RHS中对变量v使用的下标
 2. `ELSE`:否则，修改`bi`中RHS对变量v的下标
@@ -236,7 +254,7 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 
 
-![image-20201124153547183](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114713.jpg)
+![image-20201124153547183](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114713.jpg)
 
 1. `LINE2`：LHS中找到变量v
 2. `LINE3`：变量v的下标++
@@ -254,7 +272,7 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 #### 对单条语句state的处理
 
-![image-20201124153148061](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114726.jpg)
+![image-20201124153148061](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114726.jpg)
 
 
 
@@ -274,11 +292,11 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 #### def传播和可达性传播
 
-![image-20201124153728459](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114738.jpg)
+![image-20201124153728459](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114738.jpg)
 
 
 
-![image-20201124153737442](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114746.jpg)
+![image-20201124153737442](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114746.jpg)
 
 
 
@@ -296,7 +314,7 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 根据引理2和引理3，实现前向块分析如下
 
-![image-20201124153138441](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114757.jpg)
+![image-20201124153138441](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114757.jpg)
 
 
 
@@ -308,17 +326,17 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 根据引理4，实现反向块分析如下
 
-![image-20201124153824132](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114806.jpg)
+![image-20201124153824132](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114806.jpg)
 
 1. `LINE2`：找包含回边的子图，将反向块变换成前向块
 2. `LINE3`：得到RPO序列
 3. `LINE4-LINE6`：按照前向块处理该子图
 
-![image-20201125160249077](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114817.jpg)
+![image-20201125160249077](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114817.jpg)
 
 
 
-![image-20201125162150632](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114829.jpg)
+![image-20201125162150632](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114829.jpg)
 
 和`IMSSA`很像，只是不处理已经处理过的基本块
 
@@ -338,7 +356,7 @@ LHS: 赋值操作的左侧，例如 x = y + z中的 x
 
 在实现IMSSA过程中，需要加入指针分析，除了`E:V(Dominating def)`和`C:V(最大SSA下标数)`，还需要维护`D：V->E`(变量->def表达式)和`A:E->V`（地址表达式->变量）
 
-![image-20201124161215234](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114840.jpg)
+![image-20201124161215234](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114840.jpg)
 
 1. `LINE 3-4`：如果是变量，得到该变量的表达式
 2. `LINE 5`：遍历表达式中的变量，进行指针分析
@@ -378,7 +396,7 @@ binarys                                                       compare
 
 通过和`Asm2Vec`对比，`IMOPT`将准确率提高了近20%
 
-![image-20201124163336774](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114859.jpg)
+![image-20201124163336774](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114859.jpg)
 
 #### 抗混淆性能
 
@@ -386,7 +404,7 @@ binarys                                                       compare
 
 `-sub`：指令混淆
 
-![image-20201125143529563](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114912.jpg)
+![image-20201125143529563](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114912.jpg)
 
 `-bcf`：引入虚假控制流：在原来的控制流图上，通过加入条件跳转语句跳转到一个原来的基本块或者是一个虚假的基本块，并最终跳转回条件跳转语句，引入循环结构，改变控制流图。
 
@@ -403,21 +421,21 @@ void f(int x){
 
 引入虚假控制流前
 
-![image-20201125145520337](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114926.jpg)
+![image-20201125145520337](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114926.jpg)
 
 引入虚假控制流后
 
-![image-20201125145547632](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114938.jpg)
+![image-20201125145547632](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114938.jpg)
 
 `-flat`：控制流平坦化：使用一个主分发块，通过条件控制分别进入不同的基本块，然后再回到主分发块，虽然逻辑和原来的程序相同，但分析起来更加复杂，类似于虚拟机
 
 对上面函数的控制流平坦化结果如下：
 
-![image-20201125145807147](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114948.jpg)
+![image-20201125145807147](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114948.jpg)
 
 使用`ollvm 4.0`混淆后进行测试，主要测试了`-sub`，`-bcf`，`-flat`选项，结果如下：
 
-![image-20201125145912158](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-114958.jpg)
+![image-20201125145912158](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-114958.jpg)
 
 ```
  							   BAP IR  ->   IMOPT  -> new binarys -> Asm2vec
@@ -433,7 +451,7 @@ ollvm binarys                                                       compare
 
 和`SDA(the most efficient approach that supports both pointer and reachability analysis)`进行了比较，速度得到了大大提升(`15.7x`)。
 
-![image-20201125162407166](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/2020-12-01-115005.jpg)
+![image-20201125162407166](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-12-01-115005.jpg)
 
 
 

@@ -1,8 +1,27 @@
-## Too Quiet in the Library: An Empirical Study of Security Updates in Android Apps’ Native Code(ICSE 2021)
+---
+title: >-
+  Too Quiet in the Library-An Empirical Study of Security Updates in Android
+  Apps Native Code(ICSE 2021)
+tags:
+  - paper
+  - security
+  - automatic analyse
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - automatic_analyse
+date: 2021-03-20 23:57:00
+abbrlink: dc7da355
+---
+<!--toc-->
+
 
 论文：https://arxiv.org/pdf/1911.09716.pdf
 
 代码：https://github.com/salmanee/Librarian
+
+<!--more-->
 
 ### Abstract
 

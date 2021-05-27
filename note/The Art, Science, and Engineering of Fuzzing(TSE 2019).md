@@ -1,20 +1,31 @@
 ---
-typora-copy-images-to: ipic
+title: 'The Art, Science, and Engineering of Fuzzing(TSE 2019)'
+tags:
+  - paper
+  - security
+  - fuzz
+author: ycdxsb
+categories:
+  - papers
+  - security
+  - fuzz
+abbrlink: 92a4b7cb
+mathjax: true
+date: 2020-04-01 00:07:00
 ---
+<!--toc-->
 
-# The Art, Science, and Engineering of Fuzzing(TSE 2019)
 
-[TOC]
 
 ## Abstract
 
-> **Fuzzing三大优点：**部署简单、门槛低、已有的大量经验证明了它的有效性。
+> Fuzzing三大优点：部署简单、门槛低、已有的大量经验证明了它的有效性。
 
 前人研究已经很多了，本文主要是做了一个系统的梳理blabla套话，目的是系统地探索模型模糊器各个阶段的设计决策，使我们的fuzzing设计更加行之有效。
 
 <!--more-->
 
-## 1. Introduction
+## Introduction
 
 对于hacker来说，fuzzing可以用来进行渗透测试和编写exp，而白帽则想利用fuzzing在被hacker攻击前找到漏洞所在。
 
@@ -28,9 +39,9 @@ typora-copy-images-to: ipic
 
 
 
-## 2. Systemization, Taxonomy, and Test Programs
+## Systemization, Taxonomy, and Test Programs
 
-### 2.1 fuzzing & fuzzing testing
+### fuzzing & fuzzing testing
 
 > Fuzzing：对可能的输入进行采样，得到对应的输出，类似于x->f(x)
 >
@@ -44,15 +55,15 @@ typora-copy-images-to: ipic
 >
 > Fuzz Configuration：fuzz的算法和策略，例如种子如何生成等
 
-### 2.2 Paper Selection Criteria
+### Paper Selection Criteria
 
 选了哪些会议的文章云云
 
 
 
-### 2.3 Fuzz Testing Algorithm
+### Fuzz Testing Algorithm
 
-![image-20200325001530872](https://tva1.sinaimg.cn/large/00831rSTly1gd5h2obcfdj30po0eudic.jpg)
+![image-20200325001530872](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134048.jpg)
 
 > 模糊测试的算法目的是：在有限的时间，一定的约束条件下找到有限的bugs
 
@@ -69,23 +80,23 @@ typora-copy-images-to: ipic
 
 
 
-### 2.4 Taxonomy of Fuzzers
+### Taxonomy of Fuzzers
 
 黑盒、白盒、灰盒
 
-### 2.5 Fuzzer Genealogy and Overview
+### Fuzzer Genealogy and Overview
 
 不得不说汇总的真详细，直接po图了，各个研究的时间线，黑白灰，以及侧重方向一览无余
 
-![image-20200330213421085](https://tva1.sinaimg.cn/large/00831rSTly1gdca4wf3u7j30u00xvtev.jpg)
+![image-20200330213421085](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134055.jpg)
 
 以及一个整理好的表
 
-![image-20200330213449440](https://tva1.sinaimg.cn/large/00831rSTly1gdca5cldlbj30u011f7g6.jpg)
+![image-20200330213449440](https://ycdxsb-1257345996.cos.ap-beijing.myqcloud.com/blog/2020-07-11-134100.jpg)
 
-## 3. PreProcess 
+## PreProcess 
 
-### 3.1 Instrumentation
+### Instrumentation
 
 通过插桩来获取在fuzz过程中的有用信息，可以是静态的插桩，也可以是动态的插桩
 
@@ -106,7 +117,7 @@ typora-copy-images-to: ipic
 
 
 
-### 3.2 Seed Selection
+### Seed Selection
 
 有的情况下fuzzing的取值域会很广，例如MP3文件等。
 
@@ -116,7 +127,7 @@ typora-copy-images-to: ipic
 
 
 
-### 3.3 Seed Trimming
+### Seed Trimming
 
 较小的种子集合可能会消耗较少的内存并引发更高的吞吐量，所以一些fuzzers在fuzz之前减小种子集合的大小，这便是种子集合的修剪。
 
@@ -124,13 +135,13 @@ typora-copy-images-to: ipic
 
 
 
-### 3.4 Preparing a Driver Application
+### Preparing a Driver Application
 
 对于一些没法直接fuzzing的情况，可能需要自己写一个driver程序。
 
 
 
-## 4. SCHEDULING
+## SCHEDULING
 
 调度是只选择一个fuzz configuration，然后进入下一轮的fuzz。对于简单的fuzzer，例如zzuf，则没有这个步骤。已有的研究中，ADLFast，BFF等的亮点就在于他们使用的调度策略。
 
@@ -138,7 +149,7 @@ typora-copy-images-to: ipic
 
 
 
-### 4.1 The Fuzz Configuration Scheduling (FCS) Problem
+### The Fuzz Configuration Scheduling (FCS) Problem
 
 调度的目标：
 
@@ -150,7 +161,7 @@ typora-copy-images-to: ipic
 
 
 
-### 4.2 Black-box FCS Algorithms
+### Black-box FCS Algorithms
 
 对于黑盒fuzzing来说，能够用于FCS的只有：已有的crashes和bugs信息+执行时间
 
@@ -161,7 +172,7 @@ typora-copy-images-to: ipic
 
 
 
-### 4.3 Grey-box FCS Algorithms
+### Grey-box FCS Algorithms
 
 灰盒fuzzing能获取的信息比黑盒更多，例如覆盖率等信息
 
@@ -188,11 +199,11 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 
 
 
-## 5. INPUT GENERATION
+## INPUT GENERATION
 
 有的fuzzer通过在原有seed上突变来产生下一次的输入，而有的基于model产生下一次的输入
 
-### 5.1 Model-based (Generation-based) Fuzzers
+### Model-based (Generation-based) Fuzzers
 
 - predefined model 预定义模型：1.在使用前由user定义模型；2. 模型由fuzzer通过预定义的语法等来自动构建
 
@@ -200,7 +211,7 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 
 - Encoder Model：常用于有固定格式的文件的fuzzer
 
-### 5.2 Model-Less （Mutation-based）Fuzzers
+### Model-Less （Mutation-based）Fuzzers
 
 这个很常见
 
@@ -209,7 +220,7 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 - 基于块的变异
 - 基于字典的变异
 
-### 5.3 White-box Fuzzers
+### White-box Fuzzers
 
 - 动态符号执行
 - 启发式fuzzing
@@ -217,13 +228,13 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 
 
 
-## 6. INPUT EVALUATION
+## INPUT EVALUATION
 
 是对输入进行执行以及分析的过程
 
 
 
-### 6.1 Bug Oracles
+### Bug Oracles
 
 用于判断是否有crash 或者有bug的policy，分类举例如下
 
@@ -237,13 +248,13 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 
   
 
-### 6.2 Execution Optimizations   
+### Execution Optimizations   
 
   由于需要频繁运行程序，所以需要进行执行优化。例如函数级别的fuzz、通过fork已有的进程来免去加载时间等等
 
 
 
-### 6.3 Triage
+### Triage
 
 分类是分析和报告导致违反策略的测试用例的过程。分类可以分为三个步骤：重复数据消除、优先级划分和测试用例最小化。
 
@@ -253,7 +264,7 @@ AFL提出EA算法，EA算法维护了一系列的configuration，从中间选取
 
 
 
-## 7. CONFIGURATION UPDATING
+## CONFIGURATION UPDATING
 
 黑盒、白盒、灰盒fuzzing在这一个步骤上区别很大
 
