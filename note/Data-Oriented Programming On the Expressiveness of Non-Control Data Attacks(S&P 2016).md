@@ -1,28 +1,9 @@
----
-title: >-
-  Data-Oriented Programming: On the Expressiveness of Non-Control Data
-  Attacks(S&P 2016)
-tags:
-  - paper
-  - security
-  - others
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - others
-abbrlink: c30e365e
-date: 2020-05-26 16:23:00
----
-
-<!--toc-->
-
 
 > 根据控制流的攻击我们知道有ROP和JOP，分别利用包含ret和jmp的Gadgets进行攻击，劫持控制流。
 >
 > 非控制数据攻击通过攻击程序内存，达到信息泄露或者权限提升等目的。文中提出了DOP攻击，利用程序中的Gadgets，构造任意x86程序的非控制数据攻击，并且这种攻击是图灵完备的。
 
-<!--more-->
+
 ## Introduction
 
 控制流劫持攻击是目前主流的攻击，例如ROP及其变种，但对此人们也有很多防御措施：CFI、CCFI、CPI、TASR、ASLR、DEP等。
@@ -193,5 +174,4 @@ DOP目前已经实现了对ASLR、DEP、TASR防御的突破，但也可能可以
 - Hardware and Software Fault Isolation:内存隔离被广泛用于防止未经授权访问高权限资源，只有合法的代码区域才能访问特定的资源，这样可以防止一些直接的数据破坏攻击。
 
 总体来说，上述保护措施都会对程序执行带来极大的开销，只是能用来防御，但也需要考量效率问题。
-
 

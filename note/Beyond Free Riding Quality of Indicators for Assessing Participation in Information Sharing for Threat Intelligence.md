@@ -1,34 +1,8 @@
----
-title: >-
-  Beyond Free Riding-Quality of Indicators for Assessing Participation in
-  Information Sharing for Threat Intelligence
-tags:
-  - paper
-  - security
-  - security situation awareness
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - security_situation_awareness
-abbrlink: 7160fe1c
-date: 2020-04-17 21:31:00
----
-<!--toc-->
-
-
-
-> 依然是态势感知作业需求
-
 ## Abstract
 
 paper针对在威胁情报共享体系中，某些参与者为了获得共享情报，却又不给出实质性的贡献的情况（所谓搭便车），提出指标质量QoI来评估参与者的贡献，并引入了以下度量：正确性、相关性、实用性和唯一性。
 
 采用基准方法定义了质量度量，然后获得了一个参考数据集，并利用机器学习文献中的工具进行质量评估。将这些结果与仅将信息量视为贡献度量的模型进行了比较，揭示了各种有趣的观察结果，发现低质量的参与者。
-
-
-
-<!--more-->
 
 
 

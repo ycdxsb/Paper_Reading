@@ -1,25 +1,8 @@
----
-title: B2SFinder——Detecting Open-Source Software Reuse in COTS Software(ASE 2019)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - automatic_analyse
-abbrlink: 157adce2
-date: 2020-05-11 16:00:00
----
-<!--toc-->
-
 
 ## B2SFinder: Detecting Open-Source Software Reuse in COTS Software
 
 >  B2SFinder 主要是为了解决闭源二进制软件中对复用开源组件检测的问题，由于复用了开源组件，当开源组件发现存在漏洞时，复用它的二进制软件也会存在漏洞，即OSS复用漏洞。
 >
-> PS：我挂了个n作
 
 
 
@@ -29,7 +12,7 @@ date: 2020-05-11 16:00:00
 
 为了解决这个问题，B2SFinder通过对二进制文件和源代码中的7种特征进行提取，并对7种特征使用三种匹配方法和两种重要性加权方法，计算匹配分数。通过这种方法，我们对1000个流行的二进制软件中的21991个二进制文件和2189个开源库的复用进行了评估。平均每个二进制文件耗时53.85秒。我们也讨论了如何使用B2SFinder检测OSS复用漏洞。
 
-<!--more-->
+
 
 ## Introduction
 

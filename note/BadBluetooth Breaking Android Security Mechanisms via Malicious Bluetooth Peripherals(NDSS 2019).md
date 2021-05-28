@@ -1,23 +1,3 @@
----
-title: >-
-  BadBluetooth: Breaking Android Security Mechanisms via Malicious Bluetooth
-  Peripherals(NDSS 2019)
-tags:
-  - paper
-  - security
-  - mobile security
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - mobile_security
-abbrlink: '93934686'
-date: 2020-05-19 15:55:00
----
-<!--toc-->
-
-
-
 
 > 本文针对Android 4.2后google开发的蓝牙栈 BlueDroid中存在的粗粒度权限管理问题，提出了并实现了在多版本中的攻击**BadBluetooth**。
 >
@@ -26,8 +6,6 @@ date: 2020-05-19 15:55:00
 > 最后，作者在AOSP项目上实现了对应的防御框架
 
 
-
-<!--more-->
 
 ## Introduction
 

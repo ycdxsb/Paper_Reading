@@ -1,27 +1,11 @@
----
-title: >-
-  Sys: a Static/Symbolic Tool for Finding Good Bugs in Good (Browser)
-  Code(USENIX 2020)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - automatic_analyse
-abbrlink: bc8e474f
-date: 2020-08-28 16:04:00
----
-<!--toc-->
+
 
 
 > 作者设计了一个可扩展的漏洞发现工具(Sys)，并且在已经被好多自动化工具检查过的软件中发现了一些漏洞，比如说Chrome，Firefox，以及sqlite3。
 >
 > 整个系统分为两个部分：首先通过静态分析定位可能存在漏洞的地方，然后在对这些备选项通过符号执行的方法进一步确认。这样就在漏洞发现的速度 和 准确率上得到了一个平衡。
 
-<!--more-->
+
 
 ### Introduction
 

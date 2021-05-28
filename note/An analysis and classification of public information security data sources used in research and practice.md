@@ -1,29 +1,6 @@
----
-title: >-
-  An analysis and classification of public information securiy data sources used
-  in research and practice
-tags:
-  - paper
-  - security
-  - security situation awareness
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - security_situation_awareness
-abbrlink: 1ffe8215
-date: 2020-04-15 22:03:00
----
-<!--toc-->
-
-
-> 课程作业，选题数据质量评价方法，所以看了这篇文章
-
 ## Abstract
 
 是对当前公共信息安全数据源的分类与分析。对于信息安全数据来源多样且质量不一的情况进行研究分析，从六个维度进行分类和比较：(1) Type of information, (2) Integrability, (3) Timeliness, (4) Originality, (5) Type of Source,and (6) Trustworthiness。共收集和比较了68个公开的信息安全数据源，结果表明由于来源不同，数据异构繁多，加大了统一集成和使用的难度。
-
-<!--more-->
 
 ## Introduction
 

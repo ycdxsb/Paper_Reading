@@ -1,18 +1,4 @@
----
-title: 'FUZZIFICATION: Anti-Fuzzing Techniques(USENIX 2019)'
-tags:
-  - paper
-  - security
-  - fuzz
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - fuzz
-abbrlink: 14b4d99
-date: 2020-05-17 23:27:00
----
-<!--toc-->
+
 
 
 > fuzz作为一种自动化技术，在安全人员手中能够用来发现漏洞，但同时也让hacker能够通过fuzz寻找0day进行攻击。
@@ -20,8 +6,6 @@ date: 2020-05-17 23:27:00
 > 为了解决这个问题，本文提出了FUZZIFICATION技术。在实际应用中，对外发布使用FUZZIFICATION处理过的二进制文件，提高hacker fuzz的难度和成本，而对内，由于安全人员拥有未处理过的二进制，使得安全人员能够在hacker fuzz出漏洞前更早的发现漏洞并进行修补。
 
 
-
-<!--more-->
 
 ## Introduction
 

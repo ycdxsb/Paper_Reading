@@ -1,26 +1,7 @@
----
-title: >-
-  Order Matters: Semantic-Aware Neural Networks for Binary Code Similarity
-  Detection(AAAI 2020)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-mathjax: true
-categories:
-  - papers
-  - security
-  - automatic_analyse
-abbrlink: 99505d2e
-date: 2020-08-15 20:06:00
----
-<!--toc-->
-
 
 > ​		二进制代码相似性检测：在没有源代码的情况下检测相似的二进制函数。传统的方法一般使用图匹配算法进行检测，但传统方法准确率低且复杂度高。深度学习的发展为这一领域提供的新的方法，根据控制流图生成CFG，并使用GNN计算图嵌入，既高效又准确。本文提出Semantic-Aware Neural Networks ，取得了不错的成果
 
-<!--more-->
+
 
 ## Introduction
 

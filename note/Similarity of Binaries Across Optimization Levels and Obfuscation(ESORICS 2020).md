@@ -1,28 +1,9 @@
----
-title: >-
-  Similarity of Binaries Across Optimization Levels and Obfuscation(ESORICS
-  2020)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-mathjax: true
-categories:
-  - papers
-  - security
-  - automatic_analyse
-date: 2020-12-10 22:14:00
-abbrlink: 930679b9
----
-<!--toc-->
-
 
 > 现有的二进制相似度检测工作并没有很好的解决编译优化和混淆带来的影响，所以作者提出了`IMOPT`来重新优化代码，用于提高代码相似性检测的准确率。
 >
 > 该方法在测试集上和原本的Asm2vec相比，将精度提高了22.7%，并且可以缓解ollvm混淆带来的影响
 
-<!--more-->
+
 
 ### Introduction
 

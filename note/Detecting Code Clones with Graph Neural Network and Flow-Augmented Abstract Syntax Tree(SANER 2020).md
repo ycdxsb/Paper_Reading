@@ -1,27 +1,8 @@
----
-title: >-
-  Detecting Code Clones with Graph Neural Network and Flow-Augmented Abstract
-  Syntax Tree(SANER 2020)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-mathjax: true
-categories:
-  - papers
-  - security
-  - automatic_analyse
-abbrlink: c3516a94
-date: 2021-05-12 20:06:00
----
-
-<!--toc-->
 ## 基本介绍
 
 是一篇源代码和源代码相似性检测的论文，采用FA-AST构造图，然后使用图神经网络进行相似度计算
 
-<!--more-->
+
 
 目前克隆检测主要分为这4种
 

@@ -1,19 +1,3 @@
----
-title: VUDDY A Scalable Approach for Vulnerable Code Clone Discovery(S&P 2017)
-tags:
-  - paper
-  - security
-  - automatic analyse
-author: ycdxsb
-categories:
-  - papers
-  - security
-  - automatic_analyse
-abbrlink: 21fd9cb8
-date: 2020-04-03 23:57:00
----
-<!--toc-->
-
 ## Abstract
 
 随着开源世界的扩大，代码克隆的情况也越来越普遍，与此同时，由于代码克隆产生的1day漏洞也越来越多，因此自动化的克隆代码漏洞检测成为一大需求。
@@ -27,7 +11,7 @@ date: 2020-04-03 23:57:00
 - 规模和准确率完胜其余的相关研究
 - 有一定的检测0 day漏洞的能力
 
-<!--more-->
+
 
 ## Introduction
 
